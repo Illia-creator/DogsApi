@@ -2,11 +2,11 @@
 {
     public class Color
     {
-        public string value;
+        public string Value { get; set; }
         public Color(string value)
         {
             if (value == string.Empty) throw new Exception("Color Cannot Be Empty");
-            else this.value = value;
+            else Value = value;
         }
     }
 }

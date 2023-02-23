@@ -2,11 +2,11 @@
 {
     public class TailLenth
     {
-        public double value;
+        public double Value { get; set; }
         public TailLenth(double value)
         {
             if (value <= 0 ) throw new Exception("Tail Lenth Must Be Positive And Not Null");
-            else this.value = value;
+            else Value = value;
         }
     }
 }

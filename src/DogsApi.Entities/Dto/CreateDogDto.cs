@@ -1,17 +1,12 @@
 ﻿using DogsApi.Entities.EntityAbstracts;
 
-namespace DogsApi.Entities
+namespace DogsApi.Entities.Dto
 {
-    public class DogEntity
+    public class CreateDogDto
     {
-        public int Id { get; set; }
         public Name Name { get; set; }
         public Color Color { get; set; }
         public TailLenth TailLenth { get; set; }
         public Weight Weight { get; set; }
-        public DogEntity()
-        {
-
-        }
     }
 }

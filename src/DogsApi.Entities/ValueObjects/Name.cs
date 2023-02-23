@@ -2,11 +2,11 @@
 {
     public class Name
     {
-        public string value;
+        public string Value { get; set; }
         public Name(string value) 
         {
             if (value == string.Empty) throw new Exception("Name Cannot Be Empty");
-            else this.value = value;
+            else Value = value;
         }
     }
 }
