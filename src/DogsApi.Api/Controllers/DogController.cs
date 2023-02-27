@@ -2,10 +2,11 @@
 using DogsApi.Entities.Dto;
 using DogsApi.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace DogsApi.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class DogController : ControllerBase
     {
@@ -15,7 +16,7 @@ namespace DogsApi.Api.Controllers
             this.repository = repository;
         }
 
-        [HttpGet]
+        [HttpGet("dogs")]
         public async Task<ActionResult<IEnumerable<DogEntity>>> GetDogs()
         {
             var result = await repository.GetAll();
@@ -43,11 +44,12 @@ namespace DogsApi.Api.Controllers
                 Weight = createDogDto.Weight
             };
             await repository.Add(result);
+
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeeteDog(int id)
+        public async Task<ActionResult> DeleteDog(int id)
         { 
             await repository.Delete(id);
             return Ok();

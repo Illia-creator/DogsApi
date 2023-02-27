@@ -20,7 +20,10 @@ namespace DogsApi.Persistence.Repositories
         public async Task Delete(int id)
         {
             var itemToDelete = await context.Dogs.FindAsync(id);
-            if (itemToDelete is null) { throw new Exception("Item Do Not Exist"); }
+            if (itemToDelete is null) 
+            { 
+                throw new Exception("Item Do Not Exist"); 
+            }
             else
             {
                 context.Dogs.Remove(itemToDelete);
@@ -38,7 +41,7 @@ namespace DogsApi.Persistence.Repositories
             }
         }
 
-        public async Task Update(DogEntity entity)
+        public async Task Update(DogEntity entity) 
         {
             var itemToUpdate = await context.Dogs.FindAsync(entity.Id);
             if (itemToUpdate is null) { throw new NullReferenceException(); }
