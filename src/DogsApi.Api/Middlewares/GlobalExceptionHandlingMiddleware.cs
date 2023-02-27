@@ -5,7 +5,6 @@ namespace DogsApi.Api.Middlewares
 {
     public class GlobalExceptionHandlingMiddleware : IMiddleware
     {
-
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try

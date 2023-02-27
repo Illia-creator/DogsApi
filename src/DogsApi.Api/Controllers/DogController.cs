@@ -2,7 +2,8 @@
 using DogsApi.Entities.Dto;
 using DogsApi.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+
 
 namespace DogsApi.Api.Controllers
 {
@@ -34,7 +35,7 @@ namespace DogsApi.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreatetDog(CreateDogDto createDogDto) 
+        public async Task<IActionResult> CreatetDog(CreateDogDto createDogDto)
         {
             var result = new DogEntity
             {
@@ -49,18 +50,18 @@ namespace DogsApi.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteDog(int id)
-        { 
+        public async Task<IActionResult> DeleteDog(int id)
+        {
             await repository.Delete(id);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateDog(int id, UpdateDogDto updateDogDto)
+        public async Task<IActionResult> UpdateDog(int id, UpdateDogDto updateDogDto)
         {
             var result = new DogEntity
             {
-                Id= updateDogDto.Id,
+                Id = updateDogDto.Id,
                 Color = updateDogDto.Color,
                 Name = updateDogDto.Name,
                 TailLenth = updateDogDto.TailLenth,
@@ -69,6 +70,12 @@ namespace DogsApi.Api.Controllers
 
             await repository.Update(result);
             return Ok();
+        }
+
+        [HttpGet("/Ping")]
+        public IActionResult GetVersion()
+        {
+           return Ok(repository.GetVersion());
         }
     }
 }

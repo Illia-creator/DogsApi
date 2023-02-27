@@ -15,6 +15,7 @@ namespace DogsApi.Api.Infrastructure
             services.AddSwaggerGen();
             services.AddScoped<IDogRepository, DogRepository>();
             services.AddControllers();
+            services.AddSingleton<GlobalExceptionHandlingMiddleware>();
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));

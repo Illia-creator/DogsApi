@@ -1,5 +1,6 @@
 ﻿using DogsApi.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DogsApi.Persistence.Repositories
 {
@@ -10,6 +11,10 @@ namespace DogsApi.Persistence.Repositories
         public DogRepository(DataContext context) 
         {
             this.context = context;
+        }
+        public string GetVersion()
+        {
+            return "Dogs house service. Version 1.0.1";
         }
         public async Task Add(DogEntity entity)
         {
