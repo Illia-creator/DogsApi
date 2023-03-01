@@ -10,5 +10,6 @@ namespace DogsApi.Persistence.Repositories
         Task Delete(int id);
         Task Add(DogEntity entity);
         Task Update(DogEntity entity);
+        Task<IEnumerable<DogEntity>> Paging(IEnumerable<DogEntity> values, int pageNumber);
     } 
 }

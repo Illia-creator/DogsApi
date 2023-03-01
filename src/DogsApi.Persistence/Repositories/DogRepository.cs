@@ -1,6 +1,6 @@
 ﻿using DogsApi.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
+using System.Windows.Markup;
 
 namespace DogsApi.Persistence.Repositories
 {
@@ -8,7 +8,7 @@ namespace DogsApi.Persistence.Repositories
     {
         private readonly DataContext context;
 
-        public DogRepository(DataContext context) 
+        public DogRepository(DataContext context)
         {
             this.context = context;
         }
@@ -25,9 +25,9 @@ namespace DogsApi.Persistence.Repositories
         public async Task Delete(int id)
         {
             var itemToDelete = await context.Dogs.FindAsync(id);
-            if (itemToDelete is null) 
-            { 
-                throw new Exception("Item Do Not Exist"); 
+            if (itemToDelete is null)
+            {
+                throw new Exception("Item Do Not Exist");
             }
             else
             {
@@ -46,23 +46,34 @@ namespace DogsApi.Persistence.Repositories
             }
         }
 
-        public async Task Update(DogEntity entity) 
+        public async Task Update(DogEntity entity)
         {
             var itemToUpdate = await context.Dogs.FindAsync(entity.Id);
             if (itemToUpdate is null) { throw new NullReferenceException(); }
             else
-            { 
+            {
                 itemToUpdate.Color = entity.Color;
-                itemToUpdate.Name = entity.Name;    
+                itemToUpdate.Name = entity.Name;
                 itemToUpdate.Weight = entity.Weight;
-                itemToUpdate.TailLenth= entity.TailLenth;
-                await context.SaveChangesAsync();            
+                itemToUpdate.TailLenth = entity.TailLenth;
+                await context.SaveChangesAsync();
             }
         }
 
         public async Task<IEnumerable<DogEntity>> GetAll()
         {
             return await context.Dogs.ToListAsync();
+        }
+
+        public Task<IEnumerable<DogEntity>> Paging(IEnumerable<DogEntity> values, int pageNumber)
+        {
+            IEnumerable<DogEntity> result;
+            int pages = (int)values.LongCount() / 3;
+            for (int i = pageNumber - 1; i <= pages; i++)
+            {
+
+            }
+            return (Task<IEnumerable<DogEntity>>)result;
         }
     }
 }

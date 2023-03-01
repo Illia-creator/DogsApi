@@ -1,14 +1,14 @@
 ﻿using DogsApi.Api.Middlewares;
+using DogsApi.Entities;
 using DogsApi.Persistence;
 using DogsApi.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace DogsApi.Api.Infrastructure
 {
     public static class Extensions
     {
-        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration) 
+        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
@@ -16,6 +16,7 @@ namespace DogsApi.Api.Infrastructure
             services.AddScoped<IDogRepository, DogRepository>();
             services.AddControllers();
             services.AddSingleton<GlobalExceptionHandlingMiddleware>();
+            services.AddCors();
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
@@ -30,6 +31,8 @@ namespace DogsApi.Api.Infrastructure
                 application.UseSwagger();
                 application.UseSwaggerUI();
             }
+
+            application.UseCors(builder => builder.AllowAnyOrigin());
 
             application.UseHttpsRedirection();
 

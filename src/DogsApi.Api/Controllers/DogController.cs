@@ -2,7 +2,7 @@
 using DogsApi.Entities.Dto;
 using DogsApi.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace DogsApi.Api.Controllers
@@ -18,14 +18,20 @@ namespace DogsApi.Api.Controllers
         }
 
         [HttpGet("dogs")]
-        public async Task<ActionResult<IEnumerable<DogEntity>>> GetDogs()
+        public async Task<IActionResult> GetDogs(double? weight)
         {
             var result = await repository.GetAll();
-            return Ok(result);
+            var value = result.Where(x => x.Weight.Value <= weight).OrderByDescending(x => x.Weight);
+            if (value.Any())
+            {
+                return Ok(value);
+            }
+
+            else return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<DogEntity>> GetDog(int id)
+        public async Task<IActionResult> GetDog(int id)
         {
             var result = await repository.GetOne(id);
             if (result == null)
@@ -75,7 +81,7 @@ namespace DogsApi.Api.Controllers
         [HttpGet("/Ping")]
         public IActionResult GetVersion()
         {
-           return Ok(repository.GetVersion());
+            return Ok(repository.GetVersion());
         }
     }
 }
