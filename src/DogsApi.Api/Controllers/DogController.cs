@@ -41,6 +41,7 @@ namespace DogsApi.Api.Controllers
         }
 
         [HttpPost]
+        [Validation.IsExistValidation]
         public async Task<IActionResult> CreatetDog(CreateDogDto createDogDto)
         {
             var result = new DogEntity

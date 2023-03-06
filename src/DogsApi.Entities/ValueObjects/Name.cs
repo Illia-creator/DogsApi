@@ -1,4 +1,4 @@
-﻿namespace DogsApi.Entities.EntityAbstracts
+﻿namespace DogsApi.Entities.ValueObjects
 {
     public class Name
     {

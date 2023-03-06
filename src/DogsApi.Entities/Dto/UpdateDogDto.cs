@@ -1,4 +1,4 @@
-﻿using DogsApi.Entities.EntityAbstracts;
+﻿using DogsApi.Entities.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

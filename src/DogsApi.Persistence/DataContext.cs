@@ -1,5 +1,4 @@
 ﻿using DogsApi.Entities;
-using DogsApi.Entities.EntityAbstracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace DogsApi.Persistence

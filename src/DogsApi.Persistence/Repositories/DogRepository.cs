@@ -64,16 +64,5 @@ namespace DogsApi.Persistence.Repositories
         {
             return await context.Dogs.ToListAsync();
         }
-
-        public Task<IEnumerable<DogEntity>> Paging(IEnumerable<DogEntity> values, int pageNumber)
-        {
-            IEnumerable<DogEntity> result;
-            int pages = (int)values.LongCount() / 3;
-            for (int i = pageNumber - 1; i <= pages; i++)
-            {
-
-            }
-            return (Task<IEnumerable<DogEntity>>)result;
-        }
     }
 }

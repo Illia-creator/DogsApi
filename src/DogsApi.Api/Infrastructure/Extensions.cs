@@ -1,4 +1,5 @@
 ﻿using DogsApi.Api.Middlewares;
+using DogsApi.Api.Validation;
 using DogsApi.Entities;
 using DogsApi.Persistence;
 using DogsApi.Persistence.Repositories;
@@ -16,6 +17,7 @@ namespace DogsApi.Api.Infrastructure
             services.AddScoped<IDogRepository, DogRepository>();
             services.AddControllers();
             services.AddSingleton<GlobalExceptionHandlingMiddleware>();
+            services.AddScoped<IsExistValidation>();
             services.AddCors();
             services.AddDbContext<DataContext>(options =>
             {
@@ -41,6 +43,7 @@ namespace DogsApi.Api.Infrastructure
             application.UseAuthorization();
 
             application.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+            
 
             application.MapControllers();
 

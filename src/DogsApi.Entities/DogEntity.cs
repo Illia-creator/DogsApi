@@ -1,4 +1,4 @@
-﻿using DogsApi.Entities.EntityAbstracts;
+﻿using DogsApi.Entities.ValueObjects;
 
 namespace DogsApi.Entities
 {
