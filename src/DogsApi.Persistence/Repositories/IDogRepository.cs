@@ -1,4 +1,5 @@
 ﻿using DogsApi.Entities;
+using DogsApi.Persistence.Pagination;
 
 namespace DogsApi.Persistence.Repositories
 {
@@ -6,7 +7,7 @@ namespace DogsApi.Persistence.Repositories
     {
         string GetVersion();
         Task<DogEntity> GetOne(int id);
-        Task<IEnumerable<DogEntity>> GetAll();
+        Task<PaginationResponse<DogEntity>> GetAll(int pageNumber, int pageSize);
         Task Delete(int id);
         Task Add(DogEntity entity);
         Task Update(DogEntity entity);

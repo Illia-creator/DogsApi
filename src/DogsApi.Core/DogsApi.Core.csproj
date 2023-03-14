@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,9 +10,5 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DogsApi.Entities\DogsApi.Entities.csproj" />
-    <ProjectReference Include="..\DogsApi.Persistence\DogsApi.Persistence.csproj" />
-  </ItemGroup>
 
 </Project>

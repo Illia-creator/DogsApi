@@ -8,5 +8,6 @@
             if (value <= 0 ) throw new Exception("Tail Lenth Must Be Positive And Not Null");
             else Value = value;
         }
+        public static implicit operator TailLenth(double value) {  return new TailLenth(value); }
     }
 }

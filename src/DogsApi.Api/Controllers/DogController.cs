@@ -18,16 +18,17 @@ namespace DogsApi.Api.Controllers
         }
 
         [HttpGet("dogs")]
-        public async Task<IActionResult> GetDogs(double? weight)
+        public async Task<IActionResult> GetDogs(double? weight, int pageNumber, int pageSize)
         {
-            var result = await repository.GetAll();
-            var value = result.Where(x => x.Weight.Value <= weight).OrderByDescending(x => x.Weight);
-            if (value.Any())
-            {
-                return Ok(value);
-            }
+            var result = await repository.GetAll(pageNumber, pageSize);
+            //var value = result.Where(x => x.Weight.Value <= weight).OrderByDescending(x => x.Weight);
+            //if (value.Any())
+            //{
+            //    return Ok(value);
+            //}
 
-            else return Ok(result);
+            //else
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -41,7 +42,6 @@ namespace DogsApi.Api.Controllers
         }
 
         [HttpPost]
-        [Validation.IsExistValidation]
         public async Task<IActionResult> CreatetDog(CreateDogDto createDogDto)
         {
             var result = new DogEntity

@@ -1,4 +1,5 @@
 ﻿using DogsApi.Entities;
+using DogsApi.Persistence.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Markup;
 
@@ -60,9 +61,11 @@ namespace DogsApi.Persistence.Repositories
             }
         }
 
-        public async Task<IEnumerable<DogEntity>> GetAll()
+        public async Task<PaginationResponse<DogEntity>> GetAll(int pageNumber, int pageSize)
         {
-            return await context.Dogs.ToListAsync();
+            PaginationFilter filter = new PaginationFilter(pageNumber, pageSize);
+            var query = await context.Dogs.PaginateAsync(filter);
+            return query;
         }
     }
 }

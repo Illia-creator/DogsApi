@@ -8,5 +8,7 @@
             if (value == string.Empty) throw new Exception("Name Cannot Be Empty");
             else Value = value;
         }
+
+        public static implicit operator Name(string value) {  return new Name(value); }
     }
 }
