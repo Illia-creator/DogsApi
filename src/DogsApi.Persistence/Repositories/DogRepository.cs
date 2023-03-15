@@ -1,7 +1,7 @@
 ﻿using DogsApi.Entities;
+using DogsApi.Entities.ValueObjects;
 using DogsApi.Persistence.Pagination;
-using Microsoft.EntityFrameworkCore;
-using System.Windows.Markup;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DogsApi.Persistence.Repositories
 {
@@ -19,6 +19,8 @@ namespace DogsApi.Persistence.Repositories
         }
         public async Task Add(DogEntity entity)
         {
+            var addingEntity = context.Dogs.Where(x => x.Name.Value == entity.Name.Value);
+            if (addingEntity.Any()) { throw new Exception("Such Dog Is Exist"); }
             context.Dogs.Add(entity);
             await context.SaveChangesAsync();
         }
@@ -61,10 +63,18 @@ namespace DogsApi.Persistence.Repositories
             }
         }
 
-        public async Task<PaginationResponse<DogEntity>> GetAll(int pageNumber, int pageSize)
+        public async Task<PaginationResponse<DogEntity>> GetAll(double? weight, int pageNumber, int pageSize)
         {
+            IQueryable<DogEntity> dogs;
             PaginationFilter filter = new PaginationFilter(pageNumber, pageSize);
-            var query = await context.Dogs.PaginateAsync(filter);
+            PaginationResponse<DogEntity> query = new PaginationResponse<DogEntity>();
+            if (weight != null)
+            {
+                dogs = context.Dogs.Where(x => x.Weight.Value <= weight).OrderByDescending(x => x.Weight.Value);
+                query = await dogs.PaginateAsync(filter);
+            }
+            else {query = await context.Dogs.PaginateAsync(filter); }
+
             return query;
         }
     }

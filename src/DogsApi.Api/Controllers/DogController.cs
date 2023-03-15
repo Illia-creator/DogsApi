@@ -20,14 +20,7 @@ namespace DogsApi.Api.Controllers
         [HttpGet("dogs")]
         public async Task<IActionResult> GetDogs(double? weight, int pageNumber, int pageSize)
         {
-            var result = await repository.GetAll(pageNumber, pageSize);
-            //var value = result.Where(x => x.Weight.Value <= weight).OrderByDescending(x => x.Weight);
-            //if (value.Any())
-            //{
-            //    return Ok(value);
-            //}
-
-            //else
+            var result = await repository.GetAll(weight, pageNumber, pageSize);            
             return Ok(result);
         }
 

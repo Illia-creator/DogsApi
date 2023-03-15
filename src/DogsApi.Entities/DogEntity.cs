@@ -1,4 +1,5 @@
 ﻿using DogsApi.Entities.ValueObjects;
+using System.Xml.Linq;
 
 namespace DogsApi.Entities
 {
