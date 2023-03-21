@@ -16,7 +16,7 @@ namespace DogsApi.Persistence
             {
                 options.OwnsOne(x => x.Color);
                 options.OwnsOne(x => x.Name);
-                options.OwnsOne(x => x.TailLenth);
+                options.OwnsOne(x => x.TailLength);
                 options.OwnsOne(x => x.Weight);
                 options.HasKey(x => x.Id);
             });

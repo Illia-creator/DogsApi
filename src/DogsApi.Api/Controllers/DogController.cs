@@ -2,7 +2,6 @@
 using DogsApi.Entities.Dto;
 using DogsApi.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace DogsApi.Api.Controllers
@@ -20,7 +19,7 @@ namespace DogsApi.Api.Controllers
         [HttpGet("dogs")]
         public async Task<IActionResult> GetDogs(double? weight, int pageNumber, int pageSize)
         {
-            var result = await repository.GetAll(weight, pageNumber, pageSize);            
+            var result = await repository.GetAll(weight, pageNumber, pageSize);
             return Ok(result);
         }
 
@@ -41,7 +40,7 @@ namespace DogsApi.Api.Controllers
             {
                 Color = createDogDto.Color,
                 Name = createDogDto.Name,
-                TailLenth = createDogDto.TailLenth,
+                TailLength = createDogDto.TailLength,
                 Weight = createDogDto.Weight
             };
             await repository.Add(result);
@@ -64,7 +63,7 @@ namespace DogsApi.Api.Controllers
                 Id = updateDogDto.Id,
                 Color = updateDogDto.Color,
                 Name = updateDogDto.Name,
-                TailLenth = updateDogDto.TailLenth,
+                TailLength = updateDogDto.TailLength,
                 Weight = updateDogDto.Weight
             };
 

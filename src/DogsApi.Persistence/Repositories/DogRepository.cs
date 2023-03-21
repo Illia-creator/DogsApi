@@ -1,7 +1,5 @@
 ﻿using DogsApi.Entities;
-using DogsApi.Entities.ValueObjects;
 using DogsApi.Persistence.Pagination;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DogsApi.Persistence.Repositories
 {
@@ -58,7 +56,7 @@ namespace DogsApi.Persistence.Repositories
                 itemToUpdate.Color = entity.Color;
                 itemToUpdate.Name = entity.Name;
                 itemToUpdate.Weight = entity.Weight;
-                itemToUpdate.TailLenth = entity.TailLenth;
+                itemToUpdate.TailLength = entity.TailLength;
                 await context.SaveChangesAsync();
             }
         }
@@ -73,7 +71,7 @@ namespace DogsApi.Persistence.Repositories
                 dogs = context.Dogs.Where(x => x.Weight.Value <= weight).OrderByDescending(x => x.Weight.Value);
                 query = await dogs.PaginateAsync(filter);
             }
-            else {query = await context.Dogs.PaginateAsync(filter); }
+            else { query = await context.Dogs.PaginateAsync(filter); }
 
             return query;
         }

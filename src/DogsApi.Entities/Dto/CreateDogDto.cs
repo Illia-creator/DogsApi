@@ -6,7 +6,7 @@ namespace DogsApi.Entities.Dto
     {
         public string Name { get; set; }
         public string Color { get; set; }
-        public double TailLenth { get; set; }
+        public double TailLength { get; set; }
         public double Weight { get; set; }
     }
 }
